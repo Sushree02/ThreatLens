@@ -1,193 +1,224 @@
-# 🛡️ ThreatLens — URL & IP Risk Analyzer
+# 🛡️ ThreatLens
 
-ThreatLens is a full-stack cybersecurity web application that analyzes URLs, IP  & File addresses using multiple threat intelligence sources and generates an easy-to-understand risk report — complete with a risk gauge, security recommendations, a visual analysis flowchart, and a downloadable PDF report.
+ThreatLens is a cybersecurity-focused URL, IP, and File Risk Analyzer that helps users identify potentially malicious websites, IP addresses, and files using threat intelligence services such as VirusTotal.
 
-Built as a beginner-friendly B.Tech cybersecurity project using **React + Vite + Tailwind CSS** on the frontend and **Node.js + Express.js** on the backend.
+## 🌐 Live Demo
 
----
+Frontend:
+https://threat-lens-taupe.vercel.app
 
-## ✨ Features
-
-- Analyze a **URL**, an **IP address**, or an **uploaded File** (drag-and-drop)
-- HTTPS / SSL certificate checks
-- Domain age lookup
-- Threat intelligence from **VirusTotal** (URL, IP, and file scanning), **AbuseIPDB**, and **IPQualityScore**
-- Realistic detection-count-based risk scoring engine (0–100) with risk level (Safe / Moderate Risk / High Risk)
-- Dynamic confidence score based on how many providers returned data (60% / 80% / 95%)
-- Visual risk meter (gauge), detection ratio, structured findings (Threat Intelligence Summary, Threat Findings, Risk Indicators)
-- Dedicated, color-coded Final Verdict card (Safe To Visit / Proceed With Caution / Potentially Malicious / High-Risk Website)
-- Auto-generated security analysis flowchart (shown on the website only)
-- One-click **professional PDF report** — compact 1–2 page cyber threat intelligence report with a Scan ID, stat cards, and a highlighted verdict box (no flowchart in the PDF)
-- Dark mode / light mode toggle
-- Fully responsive (desktop + mobile)
-- Works even if some API keys are missing — gracefully skips unavailable providers
-- No login, no signup, no database — 100% stateless
+Backend API:
+https://threatlens-backend-6teq.onrender.com
 
 ---
 
-## 🗂️ Project Structure
+## 📌 Features
 
-```
+### URL Analysis
+- Analyze website URLs for security threats
+- SSL certificate validation
+- Domain age verification
+- VirusTotal reputation checks
+- Risk score calculation
+- Confidence score generation
+
+### IP Address Analysis
+- Analyze suspicious IP addresses
+- Threat intelligence lookup
+- Risk classification
+- Security recommendations
+
+### File Analysis
+- Upload and scan files
+- Drag-and-drop file support
+- VirusTotal file reputation checks
+- Malware detection indicators
+- Security report generation
+
+### PDF Report Generation
+- Professional security assessment reports
+- Risk summary
+- Threat findings
+- Recommendations
+- Downloadable PDF reports
+
+---
+
+## 🚀 Tech Stack
+
+### Frontend
+- React.js
+- Vite
+- Tailwind CSS
+- Axios
+- jsPDF
+
+### Backend
+- Node.js
+- Express.js
+- Multer
+- Axios
+
+### APIs
+- VirusTotal API
+
+### Deployment
+- Frontend: Vercel
+- Backend: Render
+
+---
+
+## 🏗️ Project Structure
+
+```bash
 ThreatLens/
-├── backend/
-│   ├── controllers/       # Request handlers
-│   ├── services/          # VirusTotal, AbuseIPDB, IPQualityScore, SSL/domain, risk orchestration
-│   ├── routes/             # Express routes
-│   ├── middleware/        # Validation, error handling, logging
-│   ├── utils/              # Validators, risk engine, recommendations, logger
-│   ├── config/             # Environment config
-│   ├── server.js
-│   ├── package.json
-│   └── .env.example
+│
 ├── frontend/
 │   ├── src/
-│   │   ├── components/     # Navbar, ThemeToggle, AnalysisForm, FileDropzone, RiskGauge, ResultCard, VerdictCard, Flowchart, RecommendationPanel, PdfDownloadButton, Footer
-│   │   ├── pages/          # Home, Results
-│   │   ├── hooks/          # useTheme
-│   │   ├── services/       # api.js (backend calls)
-│   │   ├── utils/          # Client-side validators
-│   │   ├── context/        # ThemeContext
-│   │   ├── App.jsx
-│   │   ├── main.jsx
-│   │   └── index.css
-│   ├── index.html
-│   ├── package.json
-│   ├── tailwind.config.js
-│   ├── vite.config.js
-│   └── .env.example
-├── .gitignore
+│   ├── public/
+│   └── package.json
+│
+├── backend/
+│   ├── routes/
+│   ├── controllers/
+│   ├── services/
+│   ├── middleware/
+│   └── server.js
+│
 └── README.md
 ```
 
 ---
 
-## ⚙️ Installation & Setup
+## ⚙️ Installation
 
-### 1. Clone / extract the project
+### Clone Repository
 
 ```bash
+git clone https://github.com/Sushree02/ThreatLens.git
 cd ThreatLens
 ```
 
-### 2. Backend Setup
+### Backend Setup
 
 ```bash
 cd backend
 npm install
-cp .env.example .env
 ```
 
-Open `.env` and add your API keys (see [How to Obtain API Keys](#-how-to-obtain-api-keys) below). The app will still run even if some keys are left blank — it will simply skip that provider and show a warning.
+Create `.env`
 
 ```env
-VIRUSTOTAL_API_KEY=your_key_here
-ABUSEIPDB_API_KEY=your_key_here
-IPQUALITYSCORE_API_KEY=your_key_here
+VIRUSTOTAL_API_KEY=your_api_key
 PORT=5000
 ```
 
-Run the backend:
+Run Backend
 
 ```bash
-npm start
+npm run dev
 ```
 
-The API will be available at `http://localhost:5000`.
+---
 
-### 3. Frontend Setup
-
-Open a **new terminal window**:
+### Frontend Setup
 
 ```bash
 cd frontend
 npm install
-cp .env.example .env   # optional — only needed if backend runs on a different URL/port
+```
+
+Create `.env`
+
+```env
+VITE_API_BASE_URL=http://localhost:5000/api
+```
+
+Run Frontend
+
+```bash
 npm run dev
 ```
 
-The app will be available at `http://localhost:5173`.
+---
+
+## 📊 Risk Classification
+
+| Risk Score | Classification |
+|------------|---------------|
+| 0-20 | Safe |
+| 21-40 | Low Risk |
+| 41-60 | Medium Risk |
+| 61-80 | High Risk |
+| 81-100 | Critical |
 
 ---
 
-## 🔑 Environment Variables
+## 📄 Generated Reports
 
-### Backend (`backend/.env`)
+ThreatLens automatically generates downloadable PDF security reports containing:
 
-| Variable | Description |
-|---|---|
-| `VIRUSTOTAL_API_KEY` | API key for VirusTotal threat intelligence |
-| `ABUSEIPDB_API_KEY` | API key for AbuseIPDB IP abuse reports |
-| `IPQUALITYSCORE_API_KEY` | API key for IPQualityScore fraud/risk scoring |
-| `PORT` | Port the backend server runs on (default `5000`) |
-
-### Frontend (`frontend/.env`) — optional
-
-| Variable | Description |
-|---|---|
-| `VITE_API_BASE_URL` | Backend API URL (default `http://localhost:5000/api`) |
-
-> ⚠️ **Never commit your real `.env` file.** Only `.env.example` files (with empty values) should be pushed to GitHub. API keys are only ever used on the backend — the frontend never sees or stores them.
+- Scan information
+- Risk score
+- Threat indicators
+- Security findings
+- Recommendations
+- Final verdict
 
 ---
 
-## 🔐 How to Obtain API Keys
+## 🎯 Educational Purpose
 
-1. **VirusTotal** — Create a free account at [virustotal.com](https://www.virustotal.com/), go to your profile → API Key.
-2. **AbuseIPDB** — Create a free account at [abuseipdb.com](https://www.abuseipdb.com/), go to Account → API.
-3. **IPQualityScore** — Create a free account at [ipqualityscore.com](https://www.ipqualityscore.com/), go to Settings → API Key.
+This project was developed as an educational cybersecurity project to demonstrate:
 
-All three offer free tiers suitable for testing and small projects. If you skip any of them, ThreatLens will continue to work using whichever providers *are* configured.
-
----
-
-## 🖥️ Running the Full App
-
-| Terminal | Command | URL |
-|---|---|---|
-| 1 (backend) | `cd backend && npm start` | http://localhost:5000 |
-| 2 (frontend) | `cd frontend && npm run dev` | http://localhost:5173 |
-
----
-
-## 🧪 API Endpoints
-
-| Method | Endpoint | Description |
-|---|---|---|
-| GET | `/api/health` | Health check + which providers are configured |
-| POST | `/api/analyze-url` | Body: `{ "url": "https://example.com" }` |
-| POST | `/api/analyze-ip` | Body: `{ "ip": "8.8.8.8" }` |
-| POST | `/api/analyze-file` | `multipart/form-data` with a `file` field. Allowed types: `.pdf .doc .docx .zip .exe .apk .png .jpg .jpeg` (max 32MB) |
+- Threat intelligence integration
+- URL reputation analysis
+- File security analysis
+- Risk assessment methodologies
+- Security reporting
 
 ---
 
 ## 📸 Screenshots
 
-> Add screenshots of the Home page, Results page, and generated PDF report here once you run the app locally.
+Add screenshots here:
 
-- `Home page (light mode)` — _screenshot placeholder_
-- `Home page (dark mode)` — _screenshot placeholder_
-- `Results page with risk gauge and flowchart` — _screenshot placeholder_
-- `Downloaded PDF report` — _screenshot placeholder_
+### Home Page
+![Home Page](screenshots/home.png)
 
----
+### Analysis Result
+![Analysis Result](screenshots/result.png)
 
-## 🚀 Future Improvements
-
-- Add caching to avoid repeated API calls for the same target
-- Add a browser extension version
-- Add historical scan comparison (still without a database — e.g. local export/import)
-- Support batch scanning of multiple URLs/IPs
-- Add more threat intel providers (e.g. Google Safe Browsing, Shodan)
-- Add unit and integration tests
+### PDF Report
+![PDF Report](screenshots/report.png)
 
 ---
 
-## 🛠️ Tech Stack
+## 👩‍💻 Author
 
-- **Frontend:** React, Vite, Tailwind CSS, jsPDF, html2canvas, Axios
-- **Backend:** Node.js, Express.js, Axios, dotenv, CORS
-- **APIs:** VirusTotal, AbuseIPDB, IPQualityScore
+**Sushree Soumya Priyadarshini**
+
+B.Tech CSE Student  
+Cybersecurity & Software Development Enthusiast
+
+GitHub:
+https://github.com/Sushree02
 
 ---
 
-*Generated by ThreatLens — built for educational cybersecurity project use.*
+## ⭐ Future Improvements
+
+- AbuseIPDB Integration
+- IPQualityScore Integration
+- WHOIS Lookup
+- Email Reputation Analysis
+- Advanced Malware Scanning
+- Threat History Tracking
+- User Authentication
+- Dashboard Analytics
+
+---
+
+## 📜 License
+
+This project is intended for educational and academic purposes.
