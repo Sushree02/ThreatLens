@@ -7,9 +7,6 @@ ThreatLens is a cybersecurity-focused URL, IP, and File Risk Analyzer that helps
 Frontend:
 https://threat-lens-taupe.vercel.app
 
-Backend API:
-https://threatlens-backend-6teq.onrender.com
-
 ---
 
 ## 📌 Features
