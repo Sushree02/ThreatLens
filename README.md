@@ -1,6 +1,6 @@
 # 🛡️ ThreatLens — URL & IP Risk Analyzer
 
-ThreatLens is a full-stack cybersecurity web application that analyzes URLs and IP addresses using multiple threat intelligence sources and generates an easy-to-understand risk report — complete with a risk gauge, security recommendations, a visual analysis flowchart, and a downloadable PDF report.
+ThreatLens is a full-stack cybersecurity web application that analyzes URLs, IP  & File addresses using multiple threat intelligence sources and generates an easy-to-understand risk report — complete with a risk gauge, security recommendations, a visual analysis flowchart, and a downloadable PDF report.
 
 Built as a beginner-friendly B.Tech cybersecurity project using **React + Vite + Tailwind CSS** on the frontend and **Node.js + Express.js** on the backend.
 
